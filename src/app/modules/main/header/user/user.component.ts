@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
     }
 
     logout() {
-        this.appService.logout();
+        //this.appService.logout();
     }
 
     formatDate(date) {

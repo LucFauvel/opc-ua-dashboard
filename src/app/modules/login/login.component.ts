@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     async loginByAuth() {
         if (this.loginForm.valid) {
             this.isAuthLoading = true;
-            await this.appService.loginByAuth(this.loginForm.value);
+            //await this.appService.loginByAuth(this.loginForm.value);
             this.isAuthLoading = false;
         } else {
             this.toastr.error('Form is not valid!');
@@ -50,13 +50,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     async loginByGoogle() {
         this.isGoogleLoading = true;
-        await this.appService.loginByGoogle();
+        //await this.appService.loginByGoogle();
         this.isGoogleLoading = false;
     }
 
     async loginByFacebook() {
         this.isFacebookLoading = true;
-        await this.appService.loginByFacebook();
+        //await this.appService.loginByFacebook();
         this.isFacebookLoading = false;
     }
 

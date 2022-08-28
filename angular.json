@@ -32,7 +32,6 @@
                         "optimization": false,
                         "namedChunks": true,
                         "allowedCommonJsDependencies": [
-                            "gatekeeper-client-sdk",
                             "path",
                             "os",
                             "fs"

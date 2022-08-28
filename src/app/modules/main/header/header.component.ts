@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
     }
 
     logout() {
-        this.appService.logout();
+        //this.appService.logout();
     }
 
     onToggleMenuSidebar() {
