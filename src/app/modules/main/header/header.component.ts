@@ -3,8 +3,8 @@ import {ToggleControlSidebar, ToggleSidebarMenu} from '@/store/ui/actions';
 import {UiState} from '@/store/ui/state';
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {UntypedFormGroup, UntypedFormControl} from '@angular/forms';
+import { AuthService } from '@auth0/auth0-angular';
 import {Store} from '@ngrx/store';
-import {AppService} from '@services/app.service';
 import {Observable} from 'rxjs';
 
 const BASE_CLASSES = 'main-header navbar navbar-expand';
@@ -18,10 +18,7 @@ export class HeaderComponent implements OnInit {
     public ui: Observable<UiState>;
     public searchForm: UntypedFormGroup;
 
-    constructor(
-        private appService: AppService,
-        private store: Store<AppState>
-    ) {}
+    constructor(private store: Store<AppState>, private authService: AuthService) {}
 
     ngOnInit() {
         this.ui = this.store.select('ui');
@@ -34,7 +31,7 @@ export class HeaderComponent implements OnInit {
     }
 
     logout() {
-        //this.appService.logout();
+        this.authService.logout();
     }
 
     onToggleMenuSidebar() {
