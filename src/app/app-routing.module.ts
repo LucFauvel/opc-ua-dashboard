@@ -1,12 +1,9 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {MainComponent} from '@modules/main/main.component';
-import {BlankComponent} from '@pages/blank/blank.component';
-import {ProfileComponent} from '@pages/profile/profile.component';
 import {DashboardComponent} from '@pages/dashboard/dashboard.component';
-import {PrivacyPolicyComponent} from '@modules/privacy-policy/privacy-policy.component';
-import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
 import {AuthGuard} from '@auth0/auth0-angular';
+import { MachinesComponent } from '@pages/machines/machines.component';
 
 const routes: Routes = [
     {
@@ -16,30 +13,14 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
             {
-                path: 'profile',
-                component: ProfileComponent
-            },
-            {
-                path: 'blank',
-                component: BlankComponent
-            },
-            {
-                path: 'sub-menu-1',
-                component: SubMenuComponent
-            },
-            {
-                path: 'sub-menu-2',
-                component: BlankComponent
-            },
-            {
                 path: '',
                 component: DashboardComponent
+            },
+            {
+                path: 'machines',
+                component: MachinesComponent
             }
         ]
-    },
-    {
-        path: 'privacy-policy',
-        component: PrivacyPolicyComponent
     },
     {path: '**', redirectTo: ''}
 ];

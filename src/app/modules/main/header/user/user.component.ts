@@ -13,14 +13,12 @@ export class UserComponent implements OnInit {
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.user = this.authService.getUser();
+        this.authService.getUser().subscribe((user) => {
+            this.user = user;
+        })
     }
 
     logout() {
         this.authService.logout();
-    }
-
-    formatDate(date) {
-        return DateTime.fromISO(date).toFormat('dd LLL yyyy');
     }
 }

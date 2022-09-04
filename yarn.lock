@@ -1583,13 +1583,6 @@
   resolved "https://registry.yarnpkg.com/@lgaitan/pace-progress/-/pace-progress-1.0.7.tgz#c96fbbd9fd4cf528feed34ea0c8f9d8b3e98f0dd"
   integrity sha512-GMoTcF6WBpno7a7Iyx7M79os26d5bCDbh7YTZmXZM8YuLR3DDtwo0/CBYddStGD6QIBTieFDz4IAQiO0dAdRGw==
 
-"@ngrx/store@14.0.0-beta.0":
-  version "14.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-14.0.0-beta.0.tgz#d0720546948ae30711a3dc2bde93d53a2fe8633d"
-  integrity sha512-fYa0XN6N3GDh4hHIQnKhMQbyOs9rAgBFMd5imCC/0A289yEJRegHL0VYgGPXkwVl9JztY9PS7R39pU+98hWXmA==
-  dependencies:
-    tslib "^2.0.0"
-
 "@ngtools/webpack@14.0.0":
   version "14.0.0"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-14.0.0.tgz#13a37933f13a8aa587697b7db7be6f1f20a360c1"

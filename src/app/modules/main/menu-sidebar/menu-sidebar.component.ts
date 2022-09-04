@@ -1,9 +1,5 @@
-import {AppState} from '@/store/state';
-import {UiState} from '@/store/ui/state';
 import {Component, HostBinding, OnInit} from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
 
 const BASE_CLASSES = 'main-sidebar elevation-4';
 @Component({
@@ -13,21 +9,17 @@ const BASE_CLASSES = 'main-sidebar elevation-4';
 })
 export class MenuSidebarComponent implements OnInit {
     @HostBinding('class') classes: string = BASE_CLASSES;
-    public ui: Observable<UiState>;
     public user;
     public menu = MENU;
 
     constructor(
         public authService: AuthService,
-        private store: Store<AppState>
     ) {}
 
     ngOnInit() {
-        this.ui = this.store.select('ui');
-        this.ui.subscribe((state: UiState) => {
-            this.classes = `${BASE_CLASSES} ${state.sidebarSkin}`;
-        });
-        this.user = this.authService.getUser();
+        this.authService.getUser().subscribe((user) => {
+            this.user = user;
+        })
     }
 }
 
@@ -38,25 +30,8 @@ export const MENU = [
         path: ['/']
     },
     {
-        name: 'Blank',
-        iconClasses: 'fas fa-file',
-        path: ['/blank']
+        name: 'Machines',
+        iconClasses: 'fas fa-hdd',
+        path: ['/machines']
     },
-    {
-        name: 'Main Menu',
-        iconClasses: 'fas fa-folder',        
-        children: [
-            {
-                name: 'Sub Menu',
-                iconClasses: 'far fa-address-book',
-                path: ['/sub-menu-1']
-            },
-
-            {
-                name: 'Blank',
-                iconClasses: 'fas fa-file',
-                path: ['/sub-menu-2']
-            }
-        ]
-    }
 ];
