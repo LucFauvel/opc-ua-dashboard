@@ -24,7 +24,6 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Machine List</h2>
                 <div class="card-tools">
                     <button type="button" class="btn btn-default" (click)="refreshMachineList()">
                         <i class="fas fa-sync"></i>
@@ -35,21 +34,31 @@
                 </div>
             </div>
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-bordered text-nowrap">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Serial</th>
+                            <th>Api Key</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr *ngIf="machines?.length === 0">
+                            <td colspan="6">
+                                <h5 style="text-align: center;">No machines were found</h5>
+                            </td>
+                        </tr>
                         <tr *ngFor="let machine of machines">
                             <td>{{machine.id}}</td>
                             <td>{{machine.name}}</td>
-                            <td class="row">
-                                <button type="button" class="col-sm-6 btn btn-block btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                <button type="button" class="col-sm-6 btn btn-block btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                            <td>{{machine.serial}}</td>
+                            <td>{{machine.apiKey}} <button type="button" style="margin-left: 5px;" class="btn btn-default" (click)="copyApiKey(machine.apiKey)"><i class="fas fa-copy"></i></button></td>
+                            <td>{{machine.status}}</td>
+                            <td>
+                                <button type="button" class="col-sm-4 btn btn-block btn-danger btn-sm" (click)="deleteMachine(machine.id)"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -67,13 +76,76 @@
             <div class="modal-header">
                 <h4 class="modal-title">Create Machine</h4>
             </div>
-            <div class="modal-body">
+            <form [formGroup]="machineForm" (ngSubmit)="createNewMachine()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Machine Name</label>
+                        <input formControlName="name" type="text" class="form-control" placeholder="Scalance LPE ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Machine Serial #</label>
+                        <input formControlName="serial" type="text" class="form-control" placeholder="P300000000">
+                    </div>
+                    <table class="table table-bordered" formArrayName="devices">
+                        <tr>
+                            <th colspan="2">Devices</th>  
+                            <th width="15px"><button type="button" (click)="addDevice()" class="btn btn-primary"><i class="fas fa-plus"></i></button></th>
+                        </tr>
+                        <tr *ngFor="let device of devices().controls; let deviceIndex=index" [formGroupName]="deviceIndex">
+                            <td colspan="2">
+                                <div class="form-group">
+                                    <label for="name">Device Name</label>
+                                    <input type="text" formControlName="deviceName" class="form-control">  
+                                </div>
 
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create</button>
-            </div>
+                                <div class="form-group">
+                                    <label for="name">Device Address (URI)</label>
+                                    <input type="text" formControlName="deviceAddress" class="form-control">  
+                                </div>
+
+                                <table class="table table-bordered" formArrayName="sensors">
+                                    <tr>
+                                        <th colspan="2">Sensors</th>  
+                                        <th width="15px"><button type="button" (click)="addDeviceSensor(deviceIndex)" class="btn btn-primary"><i class="fas fa-plus"></i></button></th>
+                                    </tr>
+                                    <tr *ngFor="let sensor of deviceSensors(deviceIndex).controls; let i=index" [formGroupName]="i">
+                                        <td colspan="2">
+                                            <div class="form-group">
+                                                <label for="name">Sensor Name</label>
+                                                <input type="text" formControlName="sensorName" class="form-control">  
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name">Sensor Type</label>
+                                                <select formControlName="sensorType" class="form-control">
+                                                    <option *ngFor="let sensorType of sensorTypes" [ngValue]="sensorType">
+                                                        {{ sensorTypeMapping[sensorType] }}
+                                                    </option>
+                                                </select>
+                                            </div>
+            
+                                            <div class="form-group">
+                                                <label for="name">Sensor Node ID</label>
+                                                <input type="text" formControlName="nodeId" class="form-control">  
+                                            </div>
+                                        </td>
+                                        <td>  
+                                            <button (click)="removeDeviceSensor(deviceIndex, i)" class="btn btn-danger"><i class="fas fa-times"></i></button>  
+                                        </td>  
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>  
+                                <button (click)="removeDevice(deviceIndex)" class="btn btn-danger"><i class="fas fa-times"></i></button>  
+                            </td>  
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="createNewMachine()">Create</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

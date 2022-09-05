@@ -1,5 +1,5 @@
 {
-  "name": "adminlte",
+  "name": "opc-ua-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
