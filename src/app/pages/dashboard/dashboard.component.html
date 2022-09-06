@@ -21,5 +21,37 @@
 
 <!-- Main content -->
 <section class="content">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-3 form-group">
+                <label for="machineDashboard">Machine Dashboard</label>
+                <select [(ngModel)]="selectedMachineId" class="form-control" (change)="loadDashboard()">
+                    <option *ngFor="let machine of machines" [ngValue]="machine.id" [selected]="machine.id === machines[0].id">
+                        {{ machine.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-2" *ngFor="let sensor of selectedMachineSensors">
+            <div class="card col-sm-5">
+                <div class="card-header">
+                    <h3 class="card-title">{{ sensor.deviceName }} - {{ sensor.sensor.name }}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas [id]="'sensorChart-' + sensor.sensor.id"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" *ngIf="!!sensor.currentValue">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{sensor.currentValue}}</h3>
+                        <p>Last Read at: {{sensor.currentReadTime}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- /.content -->

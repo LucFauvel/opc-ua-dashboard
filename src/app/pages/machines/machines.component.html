@@ -83,7 +83,7 @@
                         <input formControlName="name" type="text" class="form-control" placeholder="Scalance LPE ...">
                     </div>
                     <div class="form-group">
-                        <label for="name">Machine Serial #</label>
+                        <label for="serial">Machine Serial #</label>
                         <input formControlName="serial" type="text" class="form-control" placeholder="P300000000">
                     </div>
                     <table class="table table-bordered" formArrayName="devices">
@@ -94,12 +94,12 @@
                         <tr *ngFor="let device of devices().controls; let deviceIndex=index" [formGroupName]="deviceIndex">
                             <td colspan="2">
                                 <div class="form-group">
-                                    <label for="name">Device Name</label>
+                                    <label for="deviceName">Device Name</label>
                                     <input type="text" formControlName="deviceName" class="form-control">  
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Device Address (URI)</label>
+                                    <label for="deviceAddress">Device Address (URI)</label>
                                     <input type="text" formControlName="deviceAddress" class="form-control">  
                                 </div>
 
@@ -111,12 +111,12 @@
                                     <tr *ngFor="let sensor of deviceSensors(deviceIndex).controls; let i=index" [formGroupName]="i">
                                         <td colspan="2">
                                             <div class="form-group">
-                                                <label for="name">Sensor Name</label>
+                                                <label for="sensorName">Sensor Name</label>
                                                 <input type="text" formControlName="sensorName" class="form-control">  
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">Sensor Type</label>
+                                                <label for="sensorType">Sensor Type</label>
                                                 <select formControlName="sensorType" class="form-control">
                                                     <option *ngFor="let sensorType of sensorTypes" [ngValue]="sensorType">
                                                         {{ sensorTypeMapping[sensorType] }}
@@ -125,7 +125,7 @@
                                             </div>
             
                                             <div class="form-group">
-                                                <label for="name">Sensor Node ID</label>
+                                                <label for="nodeId">Sensor Node ID</label>
                                                 <input type="text" formControlName="nodeId" class="form-control">  
                                             </div>
                                         </td>

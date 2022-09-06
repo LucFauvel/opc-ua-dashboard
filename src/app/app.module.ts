@@ -26,6 +26,9 @@ import { AuthModule, AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { environment } from 'environments/environment';
 import { MachinesComponent } from '@pages/machines/machines.component';
 import { ApiModule } from './api/api.module';
+import { FormsModule } from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
+
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -74,14 +77,16 @@ registerLocaleData(localeEn, 'en-EN');
         }),
         ApiModule.forRoot({
             rootUrl: environment.apiRootUrl
-        })
+        }),
+        FormsModule,
+        NgChartsModule
     ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthHttpInterceptor,
             multi: true,
-        }
+        },
     ],
     bootstrap: [AppComponent]
 })

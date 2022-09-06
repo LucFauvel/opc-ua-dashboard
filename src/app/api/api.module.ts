@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { MachinesService } from './services/machines.service';
+import { ReadingsService } from './services/readings.service';
 
 /**
  * Module that provides all services and configuration.
@@ -15,6 +16,7 @@ import { MachinesService } from './services/machines.service';
   declarations: [],
   providers: [
     MachinesService,
+    ReadingsService,
     ApiConfiguration
   ],
 })
